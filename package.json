@@ -8,7 +8,7 @@
 		"pg:build": "tsc && vite build",
 		"pg:lint": "run-s pg:lint:eslint pg:lint:markuplint pg:lint:prettier pg:lint:cspell",
 		"pg:lint:eslint": "eslint src --ext ts,tsx",
-		"pg:lint:markuplint": "markuplint 'src/**/*.tsx'",
+		"pg:lint:markuplint": "markuplint src/**/*.tsx",
 		"pg:lint:prettier": "prettier --check 'src/**/*.{js,ts,tsx}'",
 		"pg:lint:cspell": "cspell src/**/* --no-progress",
 		"pg:test": "vitest run",
