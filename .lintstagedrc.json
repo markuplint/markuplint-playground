@@ -1,0 +1,6 @@
+{
+	"**/*.{ts,tsx,js,cjs,mjs,json}": ["prettier --write"],
+	"**/*.{ts,mjs,cjs,spec.js}": ["eslint --fix"],
+	".github/workflows/*.yml": ["actionlint"],
+	"**": ["cspell --no-must-find-files --no-progress --show-suggestions"]
+}
