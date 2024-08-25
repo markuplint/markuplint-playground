@@ -13,7 +13,7 @@ yarn install
 To start a development server:
 
 ```shell
-yarn run pg:dev
+yarn run dev
 ```
 
 ## Thanks

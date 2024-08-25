@@ -1,19 +1,19 @@
 {
-	"name": "@markuplint/playground",
-	"version": "4.0.0-alpha.6",
+	"name": "markuplint-playground",
+	"version": "1.0.0",
 	"private": true,
 	"type": "module",
 	"scripts": {
-		"pg:dev": "vite",
-		"pg:build": "tsc && vite build",
-		"pg:lint": "run-s pg:lint:eslint pg:lint:markuplint pg:lint:prettier pg:lint:cspell",
-		"pg:lint:eslint": "eslint src --ext ts,tsx",
-		"pg:lint:markuplint": "markuplint src/**/*.tsx",
-		"pg:lint:prettier": "prettier --check 'src/**/*.{js,ts,tsx}'",
-		"pg:lint:cspell": "cspell src/**/* --no-progress",
-		"pg:test": "vitest run",
-		"pg:preview": "vite preview",
-		"pg:up": "yarn upgrade-interactive --latest"
+		"dev": "vite",
+		"build": "tsc && vite build",
+		"lint": "run-s lint:eslint lint:markuplint lint:prettier lint:cspell",
+		"lint:eslint": "eslint src --ext ts,tsx",
+		"lint:markuplint": "markuplint src/**/*.tsx",
+		"lint:prettier": "prettier --check 'src/**/*.{js,ts,tsx}'",
+		"lint:cspell": "cspell src/**/* --no-progress",
+		"test": "vitest run",
+		"preview": "vite preview",
+		"upgrade": "yarn upgrade-interactive --latest"
 	},
 	"dependencies": {
 		"@headlessui/react": "^2.1.2",
