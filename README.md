@@ -16,6 +16,9 @@ To start a development server:
 yarn run dev
 ```
 
+If you want to modify GitHub workflow, you need to install `actionlint`.
+See [Installation document](https://github.com/rhysd/actionlint/blob/main/docs/install.md).
+
 ## Thanks
 
 This playground is inspired by:
