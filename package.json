@@ -10,7 +10,7 @@
 		"pg:lint:eslint": "eslint src --ext ts,tsx",
 		"pg:lint:markuplint": "markuplint 'src/**/*.tsx'",
 		"pg:lint:prettier": "prettier --check 'src/**/*.{js,ts,tsx}'",
-		"pg:lint:cspell": "cspell '**' --no-progress",
+		"pg:lint:cspell": "cspell src/**/* --no-progress",
 		"pg:test": "vitest run",
 		"pg:preview": "vite preview",
 		"pg:up": "yarn upgrade-interactive --latest"
