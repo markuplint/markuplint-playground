@@ -3,14 +3,10 @@
 	"version": "0.2",
 	"useGitignore": true,
 	"allowCompoundWords": true,
-	"dictionaries": [
-		"css",
-		"html",
-		"html-symbol-entities",
-		"typescript"
-	],
+	"dictionaries": ["css", "html", "html-symbol-entities", "typescript"],
 	"words": [
 		"Hirao",
+		"iconify",
 		"kagan",
 		"kagankan",
 		"markuplint",
