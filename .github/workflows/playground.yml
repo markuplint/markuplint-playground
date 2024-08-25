@@ -22,7 +22,10 @@ jobs:
                   path: ./node_modules
                   key: depends-${{ hashFiles('yarn.lock') }}
 
-            - name: Playground Building Test
+            - name: Install dependencies
+              run: yarn install --frozen-lockfile
+
+            - name: Building Test
               run: yarn build
 
     lint:
@@ -41,8 +44,8 @@ jobs:
                   path: ./node_modules
                   key: depends-${{ hashFiles('yarn.lock') }}
 
-            - name: Install root dependencies
+            - name: Install dependencies
               run: yarn install --frozen-lockfile
 
-            - name: Playground Lint
+            - name: Lint
               run: yarn lint
