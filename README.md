@@ -1,5 +1,7 @@
 # Markuplint Playground
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/34829317-52d5-4843-be38-ce4c81f89ac1/deploy-status)](https://app.netlify.com/sites/markuplint-playground/deploys)
+
 The source of Markuplint Playground (<https://playground.markuplint.dev/>).
 
 ## Development
