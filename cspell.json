@@ -3,6 +3,7 @@
 	"version": "0.2",
 	"useGitignore": true,
 	"allowCompoundWords": true,
+	"ignorePaths": [".vscode/**"],
 	"dictionaries": ["css", "html", "html-symbol-entities", "typescript"],
 	"words": [
 		"Hirao",
