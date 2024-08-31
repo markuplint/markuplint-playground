@@ -1,6 +1,6 @@
-import 'xterm/css/xterm.css';
+import '@xterm/xterm/css/xterm.css';
+import { Terminal } from '@xterm/xterm';
 import { forwardRef, useEffect, useImperativeHandle, useRef } from 'react';
-import { Terminal } from 'xterm';
 
 export type ConsoleOutputRef = {
 	appendLine: (string: string) => void;
