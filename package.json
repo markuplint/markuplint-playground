@@ -7,7 +7,7 @@
 		"dev": "vite",
 		"build": "tsc && vite build",
 		"lint": "run-s lint:eslint lint:markuplint lint:prettier lint:cspell",
-		"lint:eslint": "eslint src --ext ts,tsx",
+		"lint:eslint": "eslint src",
 		"lint:markuplint": "markuplint src/**/*.tsx",
 		"lint:prettier": "prettier --check 'src/**/*.{js,ts,tsx}'",
 		"lint:cspell": "cspell src/**/* --no-progress",
