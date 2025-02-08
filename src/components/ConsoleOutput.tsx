@@ -16,8 +16,7 @@ export const ConsoleOutput = forwardRef<ConsoleOutputRef, Props>((_, ref) => {
 
 	useEffect(() => {
 		if (wrapperRef.current) {
-			// eslint-disable-next-line unicorn/prefer-global-this -- fix it later
-			const elementStyle = window.getComputedStyle(wrapperRef.current);
+			const elementStyle = globalThis.getComputedStyle(wrapperRef.current);
 			const terminal = new Terminal({
 				theme: {
 					background: elementStyle.backgroundColor,

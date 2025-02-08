@@ -8,8 +8,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-// eslint-disable-next-line unicorn/text-encoding-identifier-case -- fix it later
-const content = fs.readFileSync(path.resolve(__dirname, './constants.json'), { encoding: 'utf-8' });
+const content = fs.readFileSync(path.resolve(__dirname, './constants.json'), { encoding: 'utf8' });
 const constants = JSON.parse(content);
 
 main();
