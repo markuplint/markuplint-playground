@@ -53,18 +53,6 @@ export default [
 		},
 	},
 	{
-		files: ['./*.js'],
-		rules: {
-			'@typescript-eslint/no-var-requires': 0,
-		},
-	},
-	{
-		files: ['./*.mjs'],
-		rules: {
-			'import/no-named-as-default-member': 0,
-		},
-	},
-	{
 		// React
 		files: ['**/*.tsx'],
 		rules: {
