@@ -43,7 +43,7 @@
 		"@markuplint-dev/prettier-config": "^1.0.1",
 		"@markuplint/jsx-parser": "4.7.5",
 		"@markuplint/react-spec": "4.5.5",
-		"@playwright/test": "1.46.0",
+		"@playwright/test": "^1.50.1",
 		"@testing-library/dom": "10.4.0",
 		"@testing-library/jest-dom": "6.4.8",
 		"@testing-library/react": "16.0.0",
@@ -64,7 +64,7 @@
 		"eslint-plugin-testing-library": "^7.1.1",
 		"globals": "^15.14.0",
 		"husky": "^9.1.5",
-		"jsdom": "24.1.1",
+		"jsdom": "^26.0.0",
 		"lint-staged": "^15.2.9",
 		"npm-run-all2": "6.2.2",
 		"postcss": "8.4.41",
@@ -73,6 +73,6 @@
 		"tailwindcss": "3.4.9",
 		"typescript": "5.5.4",
 		"vite": "5.4.0",
-		"vitest": "2.0.5"
+		"vitest": "^3.0.5"
 	}
 }
