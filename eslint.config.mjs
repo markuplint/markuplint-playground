@@ -1,4 +1,3 @@
-import { fixupPluginRules } from '@eslint/compat';
 import reactPlugin from 'eslint-plugin-react';
 import reactHooksPlugin from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
@@ -13,8 +12,9 @@ export default [
 	reactPlugin.configs.flat.recommended,
 	testingLibraryPlugin.configs['flat/react'],
 	{
+		// global settings
 		plugins: {
-			'react-hooks': fixupPluginRules(reactHooksPlugin),
+			'react-hooks': reactHooksPlugin,
 			'react-refresh': reactRefresh,
 			vitest: vitestPlugin,
 		},
@@ -25,16 +25,10 @@ export default [
 			},
 		},
 		settings: { react: { version: 'detect' }, 'import/resolver': { typescript: [] } },
-		rules: {
-			// https://github.com/facebook/react/issues/28313
-			...reactHooksPlugin.configs.recommended.rules,
-			'react/display-name': 0,
-			'react/prop-types': 0,
-			'react-refresh/only-export-components': 'warn',
-		},
 	},
 	{
-		files: ['*.{ts,tsx}'],
+		// TypeScript
+		files: ['**/*.{ts,tsx}'],
 		languageOptions: {
 			parserOptions: {
 				// https://typescript-eslint.io/getting-started/typed-linting/
@@ -71,20 +65,26 @@ export default [
 		},
 	},
 	{
-		files: ['./**/*.tsx'],
+		// React
+		files: ['**/*.tsx'],
 		rules: {
+			// https://github.com/facebook/react/issues/28313
+			...reactHooksPlugin.configs.recommended.rules,
+			'react/display-name': 0,
+			'react/prop-types': 0,
+			'react-refresh/only-export-components': 'warn',
 			'unicorn/filename-case': 0,
 		},
 	},
 	{
-		files: ['./**/*.spec.ts', './**/*.spec.tsx'],
+		files: ['**/*.spec.ts', '**/*.spec.tsx'],
 		rules: {
 			'testing-library/prefer-user-event': 2,
 			'testing-library/no-manual-cleanup': 0,
 		},
 	},
 	{
-		files: ['./vitest.config.ts'],
+		files: ['vitest.config.ts'],
 		rules: {
 			'import/no-default-export': 0,
 		},
