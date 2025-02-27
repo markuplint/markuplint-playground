@@ -2261,9 +2261,9 @@
     react-refresh "^0.14.2"
 
 "@vitest/eslint-plugin@^1.1.26":
-  version "1.1.26"
-  resolved "https://registry.yarnpkg.com/@vitest/eslint-plugin/-/eslint-plugin-1.1.26.tgz#946eed828240b4f48bbb449c25c7feeff782bf01"
-  integrity sha512-qZoaWeThjk8MAJHmAFIrLDa3oBCixSAo90+DkvZXDdDnjBYjo+ILPsfNR6uSKDub+XjpgFvz0jeezuYhWs67aA==
+  version "1.1.36"
+  resolved "https://registry.yarnpkg.com/@vitest/eslint-plugin/-/eslint-plugin-1.1.36.tgz#f018e50f1f3ed0173c80ece570f744d6f792168a"
+  integrity sha512-IjBV/fcL9NJRxGw221ieaDsqKqj8qUo7rvSupDxMjTXyhsCusHC6M+jFUNqBp4PCkYFcf5bjrKxeZoCEWoPxig==
 
 "@vitest/expect@3.0.5":
   version "3.0.5"
