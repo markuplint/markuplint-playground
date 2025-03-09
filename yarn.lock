@@ -1483,6 +1483,17 @@
     is-plain-object "5.0.0"
     type-fest "4.33.0"
 
+"@markuplint/ml-spec@4.9.5":
+  version "4.9.5"
+  resolved "https://registry.yarnpkg.com/@markuplint/ml-spec/-/ml-spec-4.9.5.tgz#2f3db1d763d637bde9835432569886f05036357d"
+  integrity sha512-7qFC5+al8N0ai7JHs85ETAIGLPMwWV19PvGpvYa518uhHDjnInw1s5w8z7EjLwcNp09y3dPCFpSxWqcpGifrlw==
+  dependencies:
+    "@markuplint/ml-ast" "4.4.9"
+    "@markuplint/types" "4.7.5"
+    dom-accessibility-api "0.7.0"
+    is-plain-object "5.0.0"
+    type-fest "4.37.0"
+
 "@markuplint/parser-utils@4.6.5":
   version "4.6.5"
   resolved "https://registry.yarnpkg.com/@markuplint/parser-utils/-/parser-utils-4.6.5.tgz#564f098974995051cb923d3019442e008067dd22"
@@ -1511,12 +1522,12 @@
     type-fest "4.33.0"
     uuid "11.0.5"
 
-"@markuplint/react-spec@4.5.5":
-  version "4.5.5"
-  resolved "https://registry.yarnpkg.com/@markuplint/react-spec/-/react-spec-4.5.5.tgz#06ffce2eaf8378700add19d36ffe746a840bcdee"
-  integrity sha512-exEFSIlkCOIB8wUy9grBJD+W8Qdny4m9aRQ3kgUqyiE43YmHc1doyjm9N4fyxFvP7Vv0Z9rCQtrSyftO8WbbMw==
+"@markuplint/react-spec@4.5.18":
+  version "4.5.18"
+  resolved "https://registry.yarnpkg.com/@markuplint/react-spec/-/react-spec-4.5.18.tgz#d22dd90ea7d5ef8ef7025a03a99c0c8a2a3010a4"
+  integrity sha512-0fxdxabrY7Iw8fPbdN2HbuXfF9wZgU10HMxnJxNoEqIxKeJfv//RqzeHJmu4pScIkirSB7NpKdlut7kcjP9cxQ==
   dependencies:
-    "@markuplint/ml-spec" "4.6.3"
+    "@markuplint/ml-spec" "4.9.5"
 
 "@markuplint/rules@4.9.3":
   version "4.9.3"
@@ -1591,6 +1602,22 @@
     debug "4.4.0"
     leven "4.0.0"
     type-fest "4.33.0"
+    whatwg-mimetype "4.0.0"
+
+"@markuplint/types@4.7.5":
+  version "4.7.5"
+  resolved "https://registry.yarnpkg.com/@markuplint/types/-/types-4.7.5.tgz#e9faf0550d8cb8bff079f4c8db5c6185c850eb66"
+  integrity sha512-JeDdIOfoVU6lYd9CKmMFkQiptPhvLXH0AkOcZO7DPVlLinIV2y0ehR/+/h8wjK13xXqOOdvJyioop6LIKl30Ng==
+  dependencies:
+    "@markuplint/shared" "4.4.10"
+    "@types/css-tree" "2.3.10"
+    "@types/debug" "4.1.12"
+    "@types/whatwg-mimetype" "3.0.2"
+    bcp-47 "2.1.0"
+    css-tree "3.1.0"
+    debug "4.4.0"
+    leven "4.0.0"
+    type-fest "4.37.0"
     whatwg-mimetype "4.0.0"
 
 "@monaco-editor/loader@^1.4.0":
@@ -7060,6 +7087,11 @@ type-fest@4.33.0:
   version "4.33.0"
   resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-4.33.0.tgz#2da0c135b9afa76cf8b18ecfd4f260ecd414a432"
   integrity sha512-s6zVrxuyKbbAsSAD5ZPTB77q4YIdRctkTbJ2/Dqlinwz+8ooH2gd+YA7VA6Pa93KML9GockVvoxjZ2vHP+mu8g==
+
+type-fest@4.37.0:
+  version "4.37.0"
+  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-4.37.0.tgz#7cf008bf77b63a33f7ca014fa2a3f09fd69e8937"
+  integrity sha512-S/5/0kFftkq27FPNye0XM1e2NsnoD/3FS+pBmbjmmtLT6I+i344KoOf7pvXreaFsDamWeaJX55nczA1m5PsBDg==
 
 type-fest@^0.6.0:
   version "0.6.0"
