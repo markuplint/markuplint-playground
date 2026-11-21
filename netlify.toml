@@ -4,3 +4,7 @@
     [headers.values]
         Cross-Origin-Embedder-Policy = "require-corp"
         Cross-Origin-Opener-Policy = "same-origin"
+
+[build.environment]
+    # Keep in sync with "engines.node" in package.json (Netlify does not read it).
+    NODE_VERSION = "24"
