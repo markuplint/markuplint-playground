@@ -1,0 +1,32 @@
+name: Update markuplint snapshot
+
+# Redeploys the playground when a new `markuplint@latest` is published,
+# so the preinstalled snapshot (see scripts/build-snapshot.ts) stays up to date.
+on:
+    schedule:
+        - cron: '17 */3 * * *'
+    workflow_dispatch:
+
+permissions: {}
+
+jobs:
+    check:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Trigger a Netlify build if the snapshot is outdated
+              env:
+                  NETLIFY_BUILD_HOOK: ${{ secrets.NETLIFY_BUILD_HOOK }}
+                  PLAYGROUND_URL: https://playground.markuplint.dev
+              run: |
+                  latest=$(npm view markuplint@latest version)
+                  deployed=$(curl -fsSL "$PLAYGROUND_URL/snapshot/manifest.json" | jq -r '.version' || echo 'none')
+                  echo "latest: $latest, deployed snapshot: $deployed"
+                  if [ "$latest" = "$deployed" ]; then
+                      echo 'The snapshot is up to date.'
+                      exit 0
+                  fi
+                  if [ -z "$NETLIFY_BUILD_HOOK" ]; then
+                      echo '::error::NETLIFY_BUILD_HOOK secret is not set.'
+                      exit 1
+                  fi
+                  curl -fsS -X POST -d '{}' "$NETLIFY_BUILD_HOOK?trigger_title=markuplint%40$latest"

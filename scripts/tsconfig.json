@@ -1,0 +1,22 @@
+{
+	"compilerOptions": {
+		"target": "ES2023",
+		"lib": ["ES2023"],
+		"module": "NodeNext",
+		"moduleResolution": "NodeNext",
+		"types": ["node"],
+		"skipLibCheck": true,
+		"noEmit": true,
+
+		/* Node.js runs .ts files by stripping types */
+		"allowImportingTsExtensions": true,
+		"verbatimModuleSyntax": true,
+
+		/* Linting */
+		"strict": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"noFallthroughCasesInSwitch": true
+	},
+	"include": ["*.ts"]
+}
