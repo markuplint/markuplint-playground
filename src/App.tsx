@@ -20,6 +20,7 @@ import { ProblemsOutput } from './components/ProblemsOutput';
 import { examples } from './examples';
 import { debounce } from './modules/debounce';
 import { parseJsonc } from './modules/json';
+import { fetchMarkuplintDistTags } from './modules/npm-registry';
 import { loadValues, saveValues } from './modules/save-values';
 import { setupContainerServer } from './server';
 
@@ -84,9 +85,8 @@ export function App() {
 	useEffect(() => {
 		// get version
 		void (async () => {
-			const response = await fetch('https://registry.npmjs.org/markuplint');
-			const json = await response.json();
-			const version = json['dist-tags'][distTag];
+			const distTags = await fetchMarkuplintDistTags();
+			const version = distTags[distTag];
 			if (typeof version !== 'string') {
 				throw new TypeError('Invalid version');
 			}

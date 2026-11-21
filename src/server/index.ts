@@ -1,8 +1,10 @@
-import type { FileSystemTree, WebContainerProcess } from '@webcontainer/api';
+import type { WebContainerProcess } from '@webcontainer/api';
 
 import { WebContainer } from '@webcontainer/api';
 
 import { parseJson } from '../modules/json';
+import { fetchMarkuplintDistTags } from '../modules/npm-registry';
+import { fetchSnapshot, isSatisfiedBySnapshot } from '../modules/snapshot';
 
 import constants from './linter/constants.json';
 
@@ -26,6 +28,8 @@ type ConsoleMethods = Readonly<{
 
 export const setupContainerServer = async ({ appendLine, append, clear }: ConsoleMethods) => {
 	clear();
+	// Download the preinstalled node_modules in parallel with booting WebContainer.
+	const snapshotPromise = fetchSnapshot();
 	appendLine('[Playground] Starting WebContainer...');
 	try {
 		webContainer = await WebContainer.boot();
@@ -39,19 +43,28 @@ export const setupContainerServer = async ({ appendLine, append, clear }: Consol
 		// window.location.reload();
 	}
 
-	const linterFiles = import.meta.glob('./linter/*', { as: 'raw', eager: true });
-	const linterDir: FileSystemTree = {};
-	for (const [path, load] of Object.entries(linterFiles)) {
-		const file = path.split('/').pop() as string;
-		linterDir[file] = {
-			file: { contents: load },
-		};
+	// Mount the snapshot first (into the empty file system), then add the other files with `fs` APIs.
+	let snapshotVersion: string | null = null;
+	const snapshot = await snapshotPromise;
+	if (snapshot) {
+		try {
+			await webContainer.mount(snapshot.data);
+			snapshotVersion = snapshot.version;
+			appendLine(`[Playground] Restored preinstalled markuplint@${snapshotVersion}`);
+		} catch (error) {
+			// eslint-disable-next-line no-console
+			console.error(error);
+			appendLine('[Playground] Failed to restore preinstalled packages');
+		}
 	}
-	const serverFiles: FileSystemTree = {
-		linter: { directory: linterDir },
-		code: { directory: {} },
-	};
-	await webContainer.mount(serverFiles);
+
+	const linterFiles = import.meta.glob('./linter/*', { as: 'raw', eager: true });
+	await webContainer.fs.mkdir('linter', { recursive: true });
+	await webContainer.fs.mkdir('code', { recursive: true });
+	for (const [path, contents] of Object.entries(linterFiles)) {
+		const file = path.split('/').pop() as string;
+		await webContainer.fs.writeFile(`linter/${file}`, contents, 'utf8');
+	}
 
 	const linterServer = new LinterServer({ appendLine, append, clear });
 	let installProcess: WebContainerProcess | undefined;
@@ -60,12 +73,40 @@ export const setupContainerServer = async ({ appendLine, append, clear }: Consol
 	let restartingServer = Promise.resolve();
 	let configFilename = '.markuplintrc';
 
+	const readDevDependencies = async (): Promise<Record<string, string>> => {
+		const json = await webContainer.fs.readFile('package.json', 'utf8');
+		const parsed = JSON.parse(json);
+		return parsed.devDependencies;
+	};
+
+	/**
+	 * Whether `npm install` can be skipped because the snapshot already has the requested packages.
+	 * It is checked only for the first installation; after that, node_modules may differ from the snapshot.
+	 */
+	const canSkipInstall = async (packages: readonly string[]) => {
+		if (snapshotVersion === null) {
+			return false;
+		}
+		const version = snapshotVersion;
+		snapshotVersion = null;
+		try {
+			return isSatisfiedBySnapshot(packages, version, await fetchMarkuplintDistTags());
+		} catch {
+			return false;
+		}
+	};
+
 	const containerServer = {
 		installationExit: Promise.resolve(-1),
 		updateDeps: async (packages: readonly string[], reset = false) => {
 			updatingDeps = (async () => {
 				if (installProcess) {
 					installProcess.kill();
+				}
+				if (!reset && (await canSkipInstall(packages))) {
+					appendLine(`[Playground] ${packages.join(' ')} is already installed. Skipped npm install`);
+					containerServer.installationExit = Promise.resolve(0);
+					return await readDevDependencies();
 				}
 				const args = ['install', '-D', ...packages];
 				appendLine(`npm ${args.join(' ')}`);
@@ -95,15 +136,16 @@ export const setupContainerServer = async ({ appendLine, append, clear }: Consol
 				switch (await containerServer.installationExit) {
 					case 0: {
 						appendLine('[Playground] Installation succeeded');
-						const json = await webContainer.fs.readFile('package.json', 'utf8');
-						const parsed = JSON.parse(json);
-						return parsed.devDependencies;
+						return await readDevDependencies();
 					}
 					case 1: {
 						appendLine('[Playground] Installation failed');
 						throw new Error('Installation failed');
 					}
-					default: // process was killed. do nothing
+					default: {
+						// process was killed. do nothing
+						return {};
+					}
 				}
 			})();
 			const result = await updatingDeps;
